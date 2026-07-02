@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Шаг 2. Создать флешку — WinGuide</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background: #f9f6f0;
+            color: #1e1e1e;
+        }
+
+        .navbar {
+            background: #ffffff;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #f57c00;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 8px rgba(245, 124, 0, 0.15);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f57c00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #f57c00;
+            border-bottom: 2px solid #f57c00;
+        }
+
+        .step-header {
+            background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%);
+            padding: 40px 40px 20px 40px;
+            text-align: center;
+            border-bottom: 2px solid #f57c00;
+        }
+
+        .step-header h1 {
+            font-size: 36px;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+
+        .step-header p {
+            font-size: 18px;
+            color: #4e4e4e;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .step-content {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .step-block {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 32px;
+            border: 1px solid #f0e8de;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            transition: 0.2s;
+        }
+
+        .step-block:hover {
+            border-color: #f57c00;
+            box-shadow: 0 6px 20px rgba(245, 124, 0, 0.08);
+        }
+
+        .step-block h2 {
+            color: #e65100;
+            font-size: 22px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-block p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .step-block ul {
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .step-block ul li {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .step-block .note {
+            background: #fff3e0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border-left: 5px solid #f57c00;
+            font-size: 15px;
+            color: #4e4e4e;
+            margin-top: 10px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background: #f57c00;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            box-shadow: 0 4px 12px rgba(245, 124, 0, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-back:hover {
+            background: #e65100;
+            transform: scale(1.02);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: #f57c00;
+            border: 2px solid #f57c00;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .btn-outline:hover {
+            background: #f57c00;
+            color: #fff;
+        }
+
+        .footer {
+            background: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid #f57c00;
+            color: #6b6b6b;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #f57c00;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            .step-header h1 {
+                font-size: 28px;
+            }
+            .step-content {
+                padding: 0 16px;
+            }
+            .step-block {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">🖥️ WinGuide</div>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="step1.html">Шаг 1</a>
+            <a href="step2.html">Шаг 2</a>
+            <a href="step3.html">Шаг 3</a>
+        </div>
+    </div>
+
+    <div class="step-header">
+        <h1>💿 Шаг 2. Создать загрузочную флешку</h1>
+        <p>Запиши образ Windows на USB-накопитель с помощью Rufus — быстро и надёжно.</p>
+    </div>
+
+    <div class="step-content">
+
+        <div class="step-block">
+            <h2>🔹 Что понадобится?</h2>
+            <ul>
+                <li><strong>USB-флешка</strong> — объёмом <strong>от 8 ГБ</strong> (все данные на ней будут удалены!).</li>
+                <li><strong>ISO-образ Windows</strong> — скачали на прошлом шаге.</li>
+                <li><strong>Программа Rufus</strong> — бесплатная, скачать с официального сайта rufus.ie.</li>
+            </ul>
+            <div class="note">
+                ⚠️ <strong>Внимание:</strong> Флешка будет полностью отформатирована. Сохрани все важные файлы с неё заранее!
+            </div>
+        </div>
+
+        <div class="step-block">
+            <h2>🔹 Пошаговая инструкция в Rufus</h2>
+            <ul>
+                <li><strong>1.</strong> Вставь флешку в USB-порт.</li>
+                <li><strong>2.</strong> Запусти Rufus (администратор не обязателен, но можно).</li>
+                <li><strong>3.</strong> В поле «Устройство» выбери свою флешку.</li>
+                <li><strong>4.</strong> Нажми «ВЫБРАТЬ» и укажи свой ISO-образ Windows.</li>
+                <li><strong>5.</strong> Остальные настройки оставь по умолчанию (MBR или GPT — автоматически).</li>
+                <li><strong>6.</strong> Нажми «СТАРТ» и подтверди форматирование.</li>
+            </ul>
+            <p>Процесс займёт 5–15 минут. После завершения флешка готова!</p>
+        </div>
+
+        <div class="step-block">
+            <h2>🔹 Альтернатива — Media Creation Tool</h2>
+            <p>Если ты используешь Windows 10, Microsoft предлагает свой инструмент:</p>
+            <ul>
+                <li>Скачай «Media Creation Tool» с сайта Microsoft.</li>
+                <li>Запусти и выбери «Создать установочный носитель для другого ПК».</li>
+                <li>Выбери язык, редакцию и архитектуру (64-бит).</li>
+                <li>Выбери «USB-устройство» и укажи свою флешку.</li>
+            </ul>
+            <div class="note">
+                💡 <strong>Совет:</strong> Rufus даёт больше гибкости и быстрее, но Media Creation Tool — простой вариант для новичков.
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href="step1.html" class="btn-outline">← Назад</a>
+            <a href="step3.html" class="btn-back">👉 Перейти к шагу 3 — Установка</a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>🛠️ Сделано для тех, кто хочет установить Windows сам. <br />
+        <a href="#">Написать автору</a> · <a href="#">GitHub</a></p>
+    </div>
+
+</body>
+</html>

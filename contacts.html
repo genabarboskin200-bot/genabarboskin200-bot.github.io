@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — WinGuide</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background: #f9f6f0;
+            color: #1e1e1e;
+        }
+
+        .navbar {
+            background: #ffffff;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #f57c00;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 8px rgba(245, 124, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #f57c00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #f57c00;
+            border-bottom: 2px solid #f57c00;
+        }
+
+        .nav-links a.active {
+            color: #f57c00;
+            border-bottom: 2px solid #f57c00;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%);
+            padding: 40px 40px 20px 40px;
+            text-align: center;
+            border-bottom: 2px solid #f57c00;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: #4e4e4e;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 0 30px;
+        }
+
+        .contact-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 40px 50px;
+            border: 1px solid #f0e8de;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .contact-card .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .contact-card h2 {
+            color: #e65100;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .contact-card .subtitle {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 18px 0;
+            border-bottom: 1px solid #f0e8de;
+            font-size: 18px;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-item .label {
+            color: #888;
+            font-weight: 500;
+        }
+
+        .contact-item .value {
+            color: #1e1e1e;
+            font-weight: 600;
+        }
+
+        .contact-item .value a {
+            color: #f57c00;
+            text-decoration: none;
+        }
+
+        .contact-item .value a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            background: #f57c00;
+            color: #fff;
+            padding: 12px 36px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            box-shadow: 0 4px 12px rgba(245, 124, 0, 0.3);
+        }
+
+        .btn-back:hover {
+            background: #e65100;
+            transform: scale(1.02);
+        }
+
+        .footer {
+            background: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid #f57c00;
+            color: #6b6b6b;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #f57c00;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            .page-header h1 {
+                font-size: 28px;
+            }
+            .content {
+                padding: 0 16px;
+            }
+            .contact-card {
+                padding: 28px 20px 36px;
+            }
+            .contact-item {
+                font-size: 16px;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html">🖥️ WinGuide</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="index.html#steps">Установка</a>
+            <a href="tips.html">Советы</a>
+            <a href="contacts.html" class="active">Контакты</a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>📬 Контакты</h1>
+        <p>Свяжись со мной — всегда рад помочь с вопросами по установке Windows.</p>
+    </div>
+
+    <div class="content">
+        <div class="contact-card">
+            <div class="icon">📞</div>
+            <h2>Связь со мной</h2>
+            <p class="subtitle">Звони или пиши — отвечаю на все вопросы!</p>
+
+            <div class="contact-item">
+                <span class="label">📱 Телефон</span>
+                <span class="value">
+                    <a href="tel:+79937902004">+7 993 790-20-04</a>
+                </span>
+            </div>
+
+            <div class="contact-item">
+                <span class="label">📧 Email</span>
+                <span class="value">
+                    <a href="mailto:genabarboskin200@gmail.com">genabarboskin200@gmail.com</a>
+                </span>
+            </div>
+
+            <a href="index.html" class="btn-back">🏠 На главную</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🛠️ Сделано для тех, кто хочет установить Windows сам. <br />
+        <a href="contacts.html">Написать автору</a> · <a href="index.html">На главную</a></p>
+    </div>
+
+</body>
+</html>
