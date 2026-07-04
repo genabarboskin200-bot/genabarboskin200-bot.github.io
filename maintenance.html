@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обновление — WinGuide</title>
+    <style>
+        body {
+            background: #f9f6f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .box {
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 3px solid #f57c00;
+            max-width: 500px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        .box .icon {
+            font-size: 64px;
+        }
+        .box h1 {
+            color: #e65100;
+            font-size: 32px;
+        }
+        .box p {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .box .timer {
+            font-size: 48px;
+            font-weight: 700;
+            color: #f57c00;
+            margin: 20px 0;
+        }
+        .box .btn {
+            display: inline-block;
+            background: #f57c00;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .box .btn:hover {
+            background: #e65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="icon">🔄</div>
+        <h1>Идёт обновление!</h1>
+        <p>Мы обновляем сайт, чтобы сделать его ещё лучше. Это займёт всего несколько минут.</p>
+        <div class="timer" id="timer">⏳</div>
+        <p style="font-size: 14px; color: #aaa;">Обновление завершится через несколько минут</p>
+        <br>
+        <a href="index.html" class="btn">Обновить страницу</a>
+    </div>
+    <script>
+        // Таймер обратного отсчёта (5 минут)
+        let timeLeft = 300;
+        const timerEl = document.getElementById('timer');
+        setInterval(() => {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            timerEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            if (timeLeft === 0) {
+                timerEl.textContent = '✅ Готово!';
+                document.querySelector('.btn').textContent = 'Перейти на сайт';
+                document.querySelector('.btn').href = 'index.html';
+            }
+            timeLeft--;
+        }, 1000);
+    </script>
+</body>
+</html>
