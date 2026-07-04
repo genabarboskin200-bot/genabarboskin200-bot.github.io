@@ -220,7 +220,158 @@
                 padding: 20px;
             }
         }
-    </style>
+        
+        <!-- ===== ТЕМЫ (СВЕТЛАЯ/ТЁМНАЯ) ===== -->
+<style>
+    /* Светлая тема (по умолчанию) */
+    :root {
+        --bg-color: #f9f6f0;
+        --text-color: #1e1e1e;
+        --card-bg: #ffffff;
+        --nav-bg: #ffffff;
+        --border-color: #f0e8de;
+        --shadow: 0 4px 16px rgba(0,0,0,0.06);
+        --hero-bg: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%);
+        --footer-bg: #ffffff;
+    }
+
+    /* Тёмная тема */
+    [data-theme="dark"] {
+        --bg-color: #1a1a2e;
+        --text-color: #e0d6ff;
+        --card-bg: #16213e;
+        --nav-bg: #0d0b1a;
+        --border-color: #2d1b69;
+        --shadow: 0 4px 16px rgba(0,0,0,0.3);
+        --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        --footer-bg: #0d0b1a;
+    }
+
+    body {
+        background: var(--bg-color);
+        color: var(--text-color);
+        transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .navbar {
+        background: var(--nav-bg);
+        border-bottom: 3px solid #f57c00;
+        transition: background 0.4s ease;
+    }
+
+    .hero {
+        background: var(--hero-bg);
+        border-bottom: 2px solid #f57c00;
+        transition: background 0.4s ease;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow);
+        transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .card p {
+        color: var(--text-color);
+        transition: color 0.4s ease;
+    }
+
+    .footer {
+        background: var(--footer-bg);
+        border-top: 2px solid #f57c00;
+        color: var(--text-color);
+        transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .footer a {
+        color: #f57c00;
+    }
+
+    /* Стиль для переключателя */
+    .theme-toggle {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 999;
+        background: var(--card-bg);
+        border: 2px solid #f57c00;
+        border-radius: 30px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: var(--shadow);
+        transition: background 0.4s ease;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .theme-toggle .label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-color);
+        transition: color 0.4s ease;
+    }
+
+    .theme-toggle .slider {
+        width: 44px;
+        height: 24px;
+        background: #ddd;
+        border-radius: 30px;
+        position: relative;
+        transition: 0.3s;
+    }
+
+    .theme-toggle .slider::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: 50%;
+        transition: 0.3s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    [data-theme="dark"] .theme-toggle .slider {
+        background: #7c3aed;
+    }
+
+    [data-theme="dark"] .theme-toggle .slider::after {
+        left: 22px;
+    }
+
+    /* Скрываем переключатель на странице услуг */
+    .page-services .theme-toggle {
+        display: none;
+    }
+
+    /* Адаптив для переключателя */
+    @media (max-width: 700px) {
+        .theme-toggle {
+            top: 130px;
+            right: 10px;
+            padding: 4px 10px;
+        }
+        .theme-toggle .label {
+            font-size: 12px;
+        }
+        .theme-toggle .slider {
+            width: 36px;
+            height: 20px;
+        }
+        .theme-toggle .slider::after {
+            width: 16px;
+            height: 16px;
+        }
+        [data-theme="dark"] .theme-toggle .slider::after {
+            left: 18px;
+        }
+    }
+</style>
 </head>
 <body>
 
