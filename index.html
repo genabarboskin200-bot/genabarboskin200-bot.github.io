@@ -340,6 +340,7 @@
         <p>🛠️ Сделано для тех, кто хочет установить Windows сам. <br />
         <a href="contacts.html">Написать автору</a> · <a href="support.html">Поддержать проект</a> · <a href="https://github.com/genabarboskin200" target="_blank">GitHub</a></p>
     </div>
+
 <!-- ===== КРАСНАЯ ВКЛАДКА "ОБНОВЛЕНИЕ" ===== -->
 <script>
 // ===== НАСТРОЙКИ =====
@@ -348,7 +349,6 @@ const MAINTENANCE_DURATION = 4; // Минуты
 
 // ===== ФУНКЦИЯ: Показать страницу обслуживания =====
 function showMaintenance() {
-    // Создаём затемнённый фон
     const overlay = document.createElement('div');
     overlay.id = 'maintenance-overlay';
     overlay.style.cssText = `
@@ -366,7 +366,6 @@ function showMaintenance() {
         font-family: 'Segoe UI', Tahoma, sans-serif;
     `;
 
-    // Создаём карточку
     const card = document.createElement('div');
     card.style.cssText = `
         background: #ffffff;
@@ -395,7 +394,6 @@ function showMaintenance() {
     overlay.appendChild(card);
     document.body.appendChild(overlay);
 
-    // ===== ТАЙМЕР =====
     let totalSeconds = MAINTENANCE_DURATION * 60;
     const timerEl = document.getElementById('maintenance-timer');
 
@@ -407,16 +405,12 @@ function showMaintenance() {
 
         if (totalSeconds <= 0) {
             clearInterval(interval);
-            // Удаляем затемнение
             document.getElementById('maintenance-overlay').remove();
-            // Показываем уведомление
             alert('✅ Обновление завершено! Сайт снова работает.');
-            // Очищаем флаг в localStorage
             localStorage.removeItem('maintenanceMode');
         }
     }, 1000);
 
-    // Сохраняем флаг, чтобы при перезагрузке страницы заглушка не исчезла
     localStorage.setItem('maintenanceMode', 'true');
     localStorage.setItem('maintenanceStart', Date.now());
 }
@@ -425,23 +419,20 @@ function showMaintenance() {
 function checkMaintenanceStatus() {
     if (localStorage.getItem('maintenanceMode') === 'true') {
         const startTime = parseInt(localStorage.getItem('maintenanceStart') || '0');
-        const elapsed = (Date.now() - startTime) / 1000; // в секундах
+        const elapsed = (Date.now() - startTime) / 1000;
         const totalSec = MAINTENANCE_DURATION * 60;
 
         if (elapsed < totalSec) {
-            // Если 4 минуты ещё не прошли — показать заглушку
             showMaintenance();
         } else {
-            // Если прошло больше 4 минут — очистить
             localStorage.removeItem('maintenanceMode');
             localStorage.removeItem('maintenanceStart');
         }
     }
 }
 
-// ===== ФУНКЦИЯ: Показать кнопку "ОБНОВЛЕНИЕ" только администратору =====
+// ===== ФУНКЦИЯ: Показать кнопку "ОБНОВЛЕНИЕ" =====
 function showAdminButton() {
-    // Проверяем, есть ли уже кнопка
     if (document.getElementById('admin-maintenance-btn')) return;
 
     const btn = document.createElement('div');
@@ -463,7 +454,6 @@ function showAdminButton() {
         transition: all 0.3s;
         border: none;
         letter-spacing: 0.5px;
-        display: none; /* Скрыта по умолчанию */
     `;
     btn.onmouseover = () => { btn.style.transform = 'scale(1.05)'; };
     btn.onmouseout = () => { btn.style.transform = 'scale(1)'; };
@@ -484,30 +474,25 @@ function showAdminButton() {
 
 // ===== ПРОВЕРКА ПРИ ЗАГРУЗКЕ =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, не запущена ли уже заглушка
     checkMaintenanceStatus();
-
-    // Через 2 секунды показываем кнопку (чтобы не мешала загрузке)
-    setTimeout(() => {
-        // Показываем кнопку только если мы на главной странице и нет заглушки
-        if (!document.getElementById('maintenance-overlay')) {
-            const btn = document.getElementById('admin-maintenance-btn');
-            if (btn) btn.style.display = 'block';
-        }
-    }, 2000);
+    
+    // Кнопка появляется сразу
+    if (!document.getElementById('maintenance-overlay')) {
+        showAdminButton();
+    }
 });
 
-// ===== ДОБАВЛЯЕМ СТИЛЬ ДЛЯ АНИМАЦИИ =====
-const style = document.createElement('style');
-style.textContent = `
+// ===== СТИЛЬ ДЛЯ АНИМАЦИИ =====
+const styleEl = document.createElement('style');
+styleEl.textContent = `
     @keyframes pulse {
         0% { transform: scale(1); }
         50% { transform: scale(1.02); }
         100% { transform: scale(1); }
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleEl);
 </script>
-    
+
 </body>
 </html>
