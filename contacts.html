@@ -412,5 +412,22 @@
         <a href="contacts.html">Написать автору</a> · <a href="index.html">На главную</a></p>
     </div>
 
+    <!-- ===== СКРИПТ ДЛЯ ТЕМЫ ===== -->
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    });
+</script>
+    
 </body>
 </html>
