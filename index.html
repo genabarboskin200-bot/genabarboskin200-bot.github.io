@@ -340,6 +340,174 @@
         <p>🛠️ Сделано для тех, кто хочет установить Windows сам. <br />
         <a href="contacts.html">Написать автору</a> · <a href="support.html">Поддержать проект</a> · <a href="https://github.com/genabarboskin200" target="_blank">GitHub</a></p>
     </div>
+<!-- ===== КРАСНАЯ ВКЛАДКА "ОБНОВЛЕНИЕ" ===== -->
+<script>
+// ===== НАСТРОЙКИ =====
+const ADMIN_PASSWORD = 'winguide2026'; // Пароль для входа
+const MAINTENANCE_DURATION = 4; // Минуты
 
+// ===== ФУНКЦИЯ: Показать страницу обслуживания =====
+function showMaintenance() {
+    // Создаём затемнённый фон
+    const overlay = document.createElement('div');
+    overlay.id = 'maintenance-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+    `;
+
+    // Создаём карточку
+    const card = document.createElement('div');
+    card.style.cssText = `
+        background: #ffffff;
+        padding: 50px 40px;
+        border-radius: 30px;
+        border: 3px solid #e65100;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        animation: pulse 1.5s infinite;
+    `;
+
+    card.innerHTML = `
+        <div style="font-size: 64px;">🔄</div>
+        <h1 style="color: #e65100; font-size: 32px; margin: 16px 0 8px;">Идёт обновление!</h1>
+        <p style="color: #555; font-size: 18px; line-height: 1.6; margin-bottom: 16px;">
+            Мы обновляем сайт, чтобы сделать его ещё лучше.<br>
+            Это займёт всего пару минут.
+        </p>
+        <div id="maintenance-timer" style="font-size: 48px; font-weight: 700; color: #f57c00; margin: 20px 0;">
+            ${MAINTENANCE_DURATION}:00
+        </div>
+        <p style="font-size: 14px; color: #aaa;">Обновление завершится автоматически</p>
+    `;
+
+    overlay.appendChild(card);
+    document.body.appendChild(overlay);
+
+    // ===== ТАЙМЕР =====
+    let totalSeconds = MAINTENANCE_DURATION * 60;
+    const timerEl = document.getElementById('maintenance-timer');
+
+    const interval = setInterval(() => {
+        totalSeconds--;
+        const mins = Math.floor(totalSeconds / 60);
+        const secs = totalSeconds % 60;
+        timerEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        if (totalSeconds <= 0) {
+            clearInterval(interval);
+            // Удаляем затемнение
+            document.getElementById('maintenance-overlay').remove();
+            // Показываем уведомление
+            alert('✅ Обновление завершено! Сайт снова работает.');
+            // Очищаем флаг в localStorage
+            localStorage.removeItem('maintenanceMode');
+        }
+    }, 1000);
+
+    // Сохраняем флаг, чтобы при перезагрузке страницы заглушка не исчезла
+    localStorage.setItem('maintenanceMode', 'true');
+    localStorage.setItem('maintenanceStart', Date.now());
+}
+
+// ===== ФУНКЦИЯ: Проверить, не запущена ли уже заглушка =====
+function checkMaintenanceStatus() {
+    if (localStorage.getItem('maintenanceMode') === 'true') {
+        const startTime = parseInt(localStorage.getItem('maintenanceStart') || '0');
+        const elapsed = (Date.now() - startTime) / 1000; // в секундах
+        const totalSec = MAINTENANCE_DURATION * 60;
+
+        if (elapsed < totalSec) {
+            // Если 4 минуты ещё не прошли — показать заглушку
+            showMaintenance();
+        } else {
+            // Если прошло больше 4 минут — очистить
+            localStorage.removeItem('maintenanceMode');
+            localStorage.removeItem('maintenanceStart');
+        }
+    }
+}
+
+// ===== ФУНКЦИЯ: Показать кнопку "ОБНОВЛЕНИЕ" только администратору =====
+function showAdminButton() {
+    // Проверяем, есть ли уже кнопка
+    if (document.getElementById('admin-maintenance-btn')) return;
+
+    const btn = document.createElement('div');
+    btn.id = 'admin-maintenance-btn';
+    btn.innerHTML = '⚠️ ОБНОВЛЕНИЕ!';
+    btn.style.cssText = `
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background: #d32f2f;
+        color: #fff;
+        padding: 14px 22px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 9998;
+        box-shadow: 0 4px 20px rgba(211, 47, 47, 0.5);
+        transition: all 0.3s;
+        border: none;
+        letter-spacing: 0.5px;
+        display: none; /* Скрыта по умолчанию */
+    `;
+    btn.onmouseover = () => { btn.style.transform = 'scale(1.05)'; };
+    btn.onmouseout = () => { btn.style.transform = 'scale(1)'; };
+
+    btn.onclick = function() {
+        const password = prompt('🔐 Введите пароль для запуска обновления:');
+        if (password === ADMIN_PASSWORD) {
+            if (confirm('⚠️ Запустить обновление сайта на ' + MAINTENANCE_DURATION + ' минуты?')) {
+                showMaintenance();
+            }
+        } else if (password !== null) {
+            alert('❌ Неверный пароль!');
+        }
+    };
+
+    document.body.appendChild(btn);
+}
+
+// ===== ПРОВЕРКА ПРИ ЗАГРУЗКЕ =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, не запущена ли уже заглушка
+    checkMaintenanceStatus();
+
+    // Через 2 секунды показываем кнопку (чтобы не мешала загрузке)
+    setTimeout(() => {
+        // Показываем кнопку только если мы на главной странице и нет заглушки
+        if (!document.getElementById('maintenance-overlay')) {
+            const btn = document.getElementById('admin-maintenance-btn');
+            if (btn) btn.style.display = 'block';
+        }
+    }, 2000);
+});
+
+// ===== ДОБАВЛЯЕМ СТИЛЬ ДЛЯ АНИМАЦИИ =====
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(style);
+</script>
+    
 </body>
 </html>
