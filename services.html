@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги — WinGuide</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background: #0d0b1a;
+            color: #e0d6ff;
+            min-height: 100vh;
+        }
+
+        /* ===== МЕНЮ ===== */
+        .navbar {
+            background: #1a1530;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #7c3aed;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 16px rgba(124, 58, 237, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #a78bfa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #d4c4ff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #c4b5fd;
+            border-bottom: 2px solid #7c3aed;
+        }
+
+        .nav-links a.active {
+            color: #c4b5fd;
+            border-bottom: 2px solid #7c3aed;
+        }
+
+        .nav-links a.support-btn {
+            background: #7c3aed;
+            color: #ffffff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            border-bottom: none;
+            transition: 0.25s;
+        }
+
+        .nav-links a.support-btn:hover {
+            background: #6d28d9;
+            transform: scale(1.05);
+            border-bottom: none;
+        }
+
+        /* ===== ШАПКА СТРАНИЦЫ ===== */
+        .page-header {
+            background: linear-gradient(135deg, #1a1530 0%, #2d1b69 100%);
+            padding: 50px 40px;
+            text-align: center;
+            border-bottom: 3px solid #7c3aed;
+        }
+
+        .page-header h1 {
+            font-size: 40px;
+            color: #c4b5fd;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: #b8a6f5;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+        .content {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 0 30px;
+        }
+
+        .service-card {
+            background: #1a1530;
+            border-radius: 24px;
+            padding: 32px 36px;
+            border: 2px solid #3b2a6b;
+            transition: 0.3s;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+        }
+
+        .service-card:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .service-card .icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .service-card h2 {
+            color: #c4b5fd;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .service-card .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #a78bfa;
+            margin: 12px 0;
+        }
+
+        .service-card .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: #8b7ab8;
+        }
+
+        .service-card p {
+            color: #d4c4ff;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .service-card ul {
+            padding-left: 20px;
+            color: #d4c4ff;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 10px 0 10px;
+        }
+
+        .service-card ul li::marker {
+            color: #7c3aed;
+        }
+
+        .service-card .highlight {
+            background: #2d1b69;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border-left: 4px solid #7c3aed;
+            color: #c4b5fd;
+            margin-top: 14px;
+            font-size: 15px;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background: #7c3aed;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.25s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+            margin-top: 16px;
+        }
+
+        .btn-order:hover {
+            background: #6d28d9;
+            transform: scale(1.02);
+            box-shadow: 0 6px 24px rgba(124, 58, 237, 0.5);
+        }
+
+        /* ===== КАРТОЧКА "КОМБО" ===== */
+        .service-card.combo {
+            border-color: #a78bfa;
+            background: linear-gradient(135deg, #1a1530 0%, #2d1b69 100%);
+        }
+
+        .service-card.combo .price {
+            color: #c4b5fd;
+        }
+
+        .service-card.combo .highlight {
+            background: #1a1530;
+            border-left-color: #a78bfa;
+        }
+
+        /* ===== КАК ОПЛАТИТЬ ===== */
+        .payment-block {
+            background: #1a1530;
+            border-radius: 24px;
+            padding: 32px 36px;
+            border: 2px solid #3b2a6b;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .payment-block h2 {
+            color: #c4b5fd;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .payment-block p {
+            color: #d4c4ff;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .payment-block .methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .payment-block .method {
+            background: #2d1b69;
+            border-radius: 16px;
+            padding: 16px 24px;
+            border: 1px solid #3b2a6b;
+            min-width: 140px;
+        }
+
+        .payment-block .method .emoji {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .payment-block .method .name {
+            color: #c4b5fd;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .payment-block .method .desc {
+            color: #8b7ab8;
+            font-size: 13px;
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        .footer {
+            background: #1a1530;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid #3b2a6b;
+            color: #8b7ab8;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            .page-header h1 {
+                font-size: 30px;
+            }
+            .content {
+                padding: 0 16px;
+            }
+            .service-card {
+                padding: 24px 18px;
+            }
+            .service-card .price {
+                font-size: 24px;
+            }
+            .btn-order {
+                width: 100%;
+                text-align: center;
+            }
+            .payment-block .methods {
+                flex-direction: column;
+                align-items: center;
+            }
+            .payment-block .method {
+                width: 100%;
+                max-width: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== МЕНЮ ===== -->
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html">🖥️ WinGuide</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="index.html#steps">Установка</a>
+            <a href="tips.html">Советы</a>
+            <a href="contacts.html">Контакты</a>
+            <a href="support.html" class="support-btn">🤝 Поддержать</a>
+        </div>
+    </div>
+
+    <!-- ===== ШАПКА ===== -->
+    <div class="page-header">
+        <h1>💜 Мои услуги</h1>
+        <p>Помогу установить Windows быстро и без лишних нервов. Выбери свой вариант!</p>
+    </div>
+
+    <!-- ===== УСЛУГИ ===== -->
+    <div class="content">
+
+        <!-- УСЛУГА 1 -->
+        <div class="service-card">
+            <span class="icon">📹</span>
+            <h2>Помощь по видеосвязи</h2>
+            <div class="price">500 ₽ <span>за сеанс</span></div>
+            <p>Я подключаюсь к вам по видео (Zoom, Skype, Telegram) и показываю каждый шаг установки Windows. Вы делаете всё сами, а я направляю и подсказываю.</p>
+            <ul>
+                <li>✅ Подробная инструкция на экране</li>
+                <li>✅ Отвечаю на все вопросы</li>
+                <li>✅ Помогаю, если что-то пошло не так</li>
+            </ul>
+            <div class="highlight">
+                📌 <strong>Важно:</strong> У вас должно быть <strong>отдельное устройство</strong> (телефон, планшет или ноутбук) для видеосвязи, чтобы я мог видеть ваш экран и процесс установки.
+            </div>
+            <a href="contacts.html" class="btn-order">📩 Заказать</a>
+        </div>
+
+        <!-- УСЛУГА 2 -->
+        <div class="service-card">
+            <span class="icon">💬</span>
+            <h2>Консультация с выбором связи</h2>
+            <div class="price">300 ₽ <span>за сеанс</span></div>
+            <p>Вы просто задаёте вопросы по установке Windows, а я отвечаю и объясняю. Можно в тексте, голосом или по видео — как вам удобно.</p>
+            <ul>
+                <li>✅ Отвечаю на любые вопросы</li>
+                <li>✅ Помогаю выбрать правильную версию Windows</li>
+                <li>✅ Подсказываю, где скачать драйвера и программы</li>
+            </ul>
+            <div class="highlight">
+                💡 Связь на ваш выбор: Telegram, WhatsApp, Skype, звонок.
+            </div>
+            <a href="contacts.html" class="btn-order">📩 Заказать</a>
+        </div>
+
+        <!-- УСЛУГА 3 -->
+        <div class="service-card">
+            <span class="icon">💾</span>
+            <h2>Создание загрузочной флешки</h2>
+            <div class="price">400 ₽ <span>за флешку</span></div>
+            <p>Я подключаюсь к вашему компьютеру через AnyDesk и самостоятельно создаю загрузочную флешку с нужной версией Windows.</p>
+            <ul>
+                <li>✅ Записываю Windows на вашу флешку (от 8 ГБ)</li>
+                <li>✅ Настраиваю Rufus под ваш ПК (UEFI / MBR)</li>
+                <li>✅ Проверяю, что флешка рабочая</li>
+            </ul>
+            <div class="highlight">
+                📌 <strong>Важно:</strong> У вас должен быть установлен <strong>AnyDesk</strong> для удалённого доступа. Флешка должна быть вставлена в компьютер.
+            </div>
+            <a href="contacts.html" class="btn-order">📩 Заказать</a>
+        </div>
+
+        <!-- КОМБО (ВСЁ ВКЛЮЧЕНО) -->
+        <div class="service-card combo">
+            <span class="icon">⭐</span>
+            <h2>КОМБО! Всё включено</h2>
+            <div class="price">990 ₽ <span>за полный пакет</span></div>
+            <p>Все три услуги в одном пакете. Дешевле, чем по отдельности, а результат тот же — установка Windows под ключ!</p>
+            <ul>
+                <li>✅ Помощь по видеосвязи</li>
+                <li>✅ Консультация с выбором связи</li>
+                <li>✅ Создание загрузочной флешки</li>
+                <li>✅ Плюс: проверка установки и настройка после</li>
+            </ul>
+            <div class="highlight">
+                💰 <strong>Экономия:</strong> 500 + 300 + 400 = 1200 ₽<br>
+                По комбо вы платите всего <strong>990 ₽</strong> — экономите 210 ₽!
+            </div>
+            <a href="contacts.html" class="btn-order">📩 Заказать</a>
+        </div>
+
+        <!-- КАК ОПЛАТИТЬ -->
+        <div class="payment-block">
+            <h2>💳 Как оплатить</h2>
+            <p>Выберите удобный для вас способ. Все способы безопасны и надёжны.</p>
+            <div class="methods">
+                <div class="method">
+                    <span class="emoji">💳</span>
+                    <div class="name">DonatePay</div>
+                    <div class="desc">По ссылке (карта, СБП)</div>
+                </div>
+                <div class="method">
+                    <span class="emoji">📱</span>
+                    <div class="name">Перевод по номеру</div>
+                    <div class="desc">СБП (любой банк)</div>
+                </div>
+                <div class="method">
+                    <span class="emoji">📲</span>
+                    <div class="name">Telegram</div>
+                    <div class="desc">По номеру телефона</div>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: #8b7ab8;">
+                📌 Реквизиты отправлю в личном сообщении после согласования заказа.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ===== ПОДВАЛ ===== -->
+    <div class="footer">
+        <p>🛠️ Сделано для тех, кто хочет установить Windows сам. <br />
+        <a href="contacts.html">Написать автору</a> · <a href="support.html">Поддержать проект</a></p>
+    </div>
+
+</body>
+</html>
