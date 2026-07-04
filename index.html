@@ -653,6 +653,35 @@ styleEl.textContent = `
 `;
 document.head.appendChild(styleEl);
 </script>
+    
+    <!-- ===== СКРИПТ ДЛЯ ТЕМЫ ===== -->
+    <script>
+        // Функция переключения темы
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
 
+        // Загрузка сохранённой темы
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Если в системе тёмная тема — ставим тёмную
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        });
+
+        // Если страница услуг — скрываем переключатель
+        if (document.body.classList.contains('page-services')) {
+            const toggle = document.querySelector('.theme-toggle');
+            if (toggle) toggle.style.display = 'none';
+        }
+    </script>
+    
 </body>
 </html>
